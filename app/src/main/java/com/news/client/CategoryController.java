@@ -4,14 +4,12 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,7 +33,7 @@ public class CategoryController extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main_category_menu);
+        setContentView(R.layout.main_category);
 
         new SourceLoader().execute();
     }
@@ -47,8 +45,8 @@ public class CategoryController extends ListActivity {
 
         Source data = newslist.get(pos);
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.getId()));
-
+        Intent intent = new Intent(getBaseContext(), ArticlesController.class);
+        intent.putExtra("SOURCE_ID", data.getId());
         startActivity(intent);
     }
 
@@ -60,7 +58,6 @@ public class CategoryController extends ListActivity {
         protected Void doInBackground(Void... params) {
 
             try {
-                //TODO
                 DataProxy proxy = new DataProxy();
                 SourceResponse result = proxy.loadSources(ESourceCategory.GENERAL, ELanguage.ENGLISH, ECountry.USA);
 
@@ -75,7 +72,7 @@ public class CategoryController extends ListActivity {
                 newslist = new ArrayList<>();
             }
 
-            newsadaptor = new CategoryAdaptor(CategoryController.this, R.layout.newstagsvw, newslist);
+            newsadaptor = new CategoryAdaptor(CategoryController.this, R.layout.article_item, newslist);
             return null;
         }
 
