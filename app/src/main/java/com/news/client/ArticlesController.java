@@ -4,9 +4,12 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import com.news.api.Article;
 import com.news.api.ArticleResponse;
 import com.news.api.DataProxy;
+import com.news.util.DateUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -58,7 +62,7 @@ public class ArticlesController extends ListActivity {
 
     private class ArticleLoader extends AsyncTask<Void, Void, Void> {
 
-        private ProgressDialog progress = null;
+        private CustomProgressDialog progress = null;
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -81,11 +85,8 @@ public class ArticlesController extends ListActivity {
 
         @Override
         protected void onPreExecute() {
-            progress = ProgressDialog.show(
-                    ArticlesController.this,
-                    "",
-                    "Loading. Please wait...",
-                    true);
+            progress = new CustomProgressDialog(ArticlesController.this);
+            progress.show();
             super.onPreExecute();
         }
 
@@ -127,8 +128,13 @@ public class ArticlesController extends ListActivity {
                 TextView description = (TextView) view.findViewById(R.id.txtDescription);
                 TextView date = (TextView) view.findViewById(R.id.txtDate);
                 title.setText(article.getTitle());
-                author.setText(article.getAuthor());
+                author.setText("Author: " + article.getAuthor());
                 description.setText(article.getDescription());
+
+                String strDate = article.getPublishedAt();
+
+                DateUtil.parseDateFromString(strDate);
+
                 date.setText(article.getPublishedAt()); //TODO
             }
 

@@ -15,9 +15,9 @@
         android:layout_marginTop="50dp"
         android:padding="5dp"
         android:shadowColor="#AAAAAA"
-        android:text="NEWS APP"
+        android:text="HOT NEWS APP"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
         android:textStyle="bold" />
 
     <TextView
@@ -31,9 +31,9 @@
         android:text="Get latest news. News App can provide live headlines from 70 sources.."
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textColor="?android:attr/colorButtonNormal"
+        android:textSize="18sp"
+        android:textStyle="bold|italic" />
 
 
     <LinearLayout

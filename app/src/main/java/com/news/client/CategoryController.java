@@ -52,7 +52,7 @@ public class CategoryController extends ListActivity {
 
     private class SourceLoader extends AsyncTask<Void, Void, Void> {
 
-        private ProgressDialog progress = null;
+        private CustomProgressDialog progress = null;
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -78,11 +78,8 @@ public class CategoryController extends ListActivity {
 
         @Override
         protected void onPreExecute() {
-            progress = ProgressDialog.show(
-                    CategoryController.this,
-                    "",
-                    "Loading. Please wait...",
-                    true);
+            progress = new CustomProgressDialog(CategoryController.this);
+            progress.show();
 
             super.onPreExecute();
         }
