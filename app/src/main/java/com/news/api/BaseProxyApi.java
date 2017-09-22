@@ -1,5 +1,7 @@
 package com.news.api;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -22,16 +24,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BaseProxyApi {
 
     private static final String CLOUD_URL = "https://newsapi.org/v1/";
-
-    private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'";
-    private static final int MAX_IDLE_CONNECTIONS = 100;
-    private static final int TIMEOUT = 30;
-
     private static final String API_KEY = "faed10400b454658a235e1d7e3c0a5e9";
 
-    protected final static Gson gson = registerTypeFromMapper();
+    private static final String TAG = "PROXY";
 
-    private final static boolean verbose = true;
+    private final static Gson gson = registerTypeFromMapper();
 
     protected static <S> S createService(Class<S> serviceClass) {
 
@@ -52,17 +49,18 @@ public class BaseProxyApi {
 
                 okhttp3.Request request = requestBuilder.build();
 
-                if(verbose){
+                if(Config.VERBOSE){
                     //log request
-                    System.out.println("\n===================================================================");
-                    System.out.println(String.format("Starting: %s ", actualTimeStampDate));
-                    System.out.println(String.format("%s", original.url().host()));
-                    System.out.println(String.format("%s %s", original.method(), original.url().encodedPath()));
+                    Log.d(TAG,"===================================================================");
+                    Log.d(TAG,"\n===================================================================");
+                    Log.d(TAG,String.format("Starting: %s ", actualTimeStampDate));
+                    Log.d(TAG,String.format("%s", original.url().host()));
+                    Log.d(TAG,String.format("%s %s", original.method(), original.url().encodedPath()));
                 }
 
                 okhttp3.Response response = chain.proceed(request);
 
-                if(!verbose){
+                if(!Config.VERBOSE){
                     return response;
                 }
 
@@ -71,16 +69,16 @@ public class BaseProxyApi {
 
                     //log response
                     String prettyJsonString = prettyJson(jsonResponse);
-                    System.out.print(String.format("ArticleResponse: \n%s", prettyJsonString));
+                    Log.d(TAG,String.format("ArticleResponse: \n%s", prettyJsonString));
 
                     long responseTimeInMilis = new Timestamp(new Date().getTime()).getTime() - actualTimeStampDate.getTime();
-                    System.out.println(String.format("\nRespons time: %sms", responseTimeInMilis));
+                    Log.d(TAG,String.format("\nRespons time: %sms", responseTimeInMilis));
                     return response.newBuilder()
                             .body(ResponseBody.create(response.body().contentType(), jsonResponse)).build();
                 } catch (Exception e) {
-                    System.out.println("\nError: ");
-                    System.out.print(String.format("Message: %s", e.getMessage()));
-                    System.out.print(String.format("StackTrace: %s", e.getStackTrace().toString()));
+                    Log.d(TAG,"\nError: ");
+                    Log.d(TAG,String.format("Message: %s", e.getMessage()));
+                    //Log.d(TAG,String.format("StackTrace: %s", e.getStackTrace().toString()));
                 }finally {
                     //close the resources
                     response.close();
@@ -96,8 +94,8 @@ public class BaseProxyApi {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .dispatcher(dispatcher)
                 .connectionPool(new ConnectionPool(
-                        MAX_IDLE_CONNECTIONS,
-                        TIMEOUT,
+                        Config.MAX_IDLE_CONNECTIONS,
+                        Config.TIMEOUT,
                         TimeUnit.SECONDS));
 
         builder.interceptors().add(interceptor);
@@ -114,16 +112,11 @@ public class BaseProxyApi {
         return retrofit.create(serviceClass);
     }
 
-
     private static Gson registerTypeFromMapper(){
 
         GsonBuilder result = new GsonBuilder();
 
-//		for ( JsonClassMap item : JsonClassMap.getRegisteredClassMaps()) {
-//			result.registerTypeAdapter(item.getClassType(), JsonMapConverter.class);
-//		}
-
-        result.setDateFormat(DATE_FORMAT);
+        result.setDateFormat(Config.DATE_FORMAT);
         return result.create();
     }
 
@@ -132,6 +125,7 @@ public class BaseProxyApi {
     private static String prettyJson(String jsonResponse) {
         JsonElement je = jp.parse(jsonResponse);
         String prettyJsonString = gsonTmp.toJson(je);
+        
         return prettyJsonString;
     }
 }
