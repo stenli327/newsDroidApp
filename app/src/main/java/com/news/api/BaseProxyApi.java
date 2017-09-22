@@ -125,7 +125,7 @@ public class BaseProxyApi {
     private static String prettyJson(String jsonResponse) {
         JsonElement je = jp.parse(jsonResponse);
         String prettyJsonString = gsonTmp.toJson(je);
-        
+
         return prettyJsonString;
     }
 }

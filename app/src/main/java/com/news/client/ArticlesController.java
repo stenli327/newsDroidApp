@@ -130,12 +130,7 @@ public class ArticlesController extends ListActivity {
                 title.setText(article.getTitle());
                 author.setText("Author: " + article.getAuthor());
                 description.setText(article.getDescription());
-
-                String strDate = article.getPublishedAt();
-
-                DateUtil.parseDateFromString(strDate);
-
-                date.setText(article.getPublishedAt()); //TODO
+                date.setText(DateUtil.customizeDate(article.getPublishedAt()));
             }
 
             return view;
