@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:background="@android:color/holo_blue_dark"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp">
 
     <ListView
         android:id="@android:id/list"
