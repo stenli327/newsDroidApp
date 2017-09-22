@@ -79,7 +79,10 @@ public class CategoryController extends ListActivity {
         @Override
         protected void onPreExecute() {
             progress = ProgressDialog.show(
-                    CategoryController.this, null, "24/7 updates for you...");
+                    CategoryController.this,
+                    "",
+                    "Loading. Please wait...",
+                    true);
 
             super.onPreExecute();
         }
@@ -119,7 +122,7 @@ public class CategoryController extends ListActivity {
                 TextView url = (TextView) view.findViewById(R.id.txtDate);
                 title.setText(itemdata.getName());
                 description.setText(itemdata.getDescription());
-                url.setText("on " + itemdata.getUrl());
+                url.setText(itemdata.getUrl());
             }
 
             return view;

@@ -82,7 +82,10 @@ public class ArticlesController extends ListActivity {
         @Override
         protected void onPreExecute() {
             progress = ProgressDialog.show(
-                    ArticlesController.this, null, "24/7 updates for you...");
+                    ArticlesController.this,
+                    "",
+                    "Loading. Please wait...",
+                    true);
             super.onPreExecute();
         }
 
