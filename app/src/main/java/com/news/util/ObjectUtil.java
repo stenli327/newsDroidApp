@@ -1,4 +1,4 @@
-package com.news.api;
+package com.news.util;
 
 import java.math.BigDecimal;
 import java.util.Collection;
