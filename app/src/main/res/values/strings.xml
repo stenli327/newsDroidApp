@@ -1,13 +1,11 @@
 <resources>
-    <string name="app_name">News App</string>
+    <string name="app_name">Hot Live Headlines</string>
     <string name="action_settings">Settings</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="GoogleNews">Google News</string>
-    <string name="YahooNews">Yahoo News</string>
-    <string name="BBCNews">BBC News</string>
-    <string name="CNNNews">CNN News</string>
+    <string name="Category">Categories</string>
+    <string name="Article">Article</string>
     <string name="enter">ENTER</string>
     <string name="Intro">Intro</string>
     <string name="title_activity_main">Powered by Google,Yahoo,CNN</string>
@@ -17,5 +15,17 @@
         <item>German</item>
         <item>Italian</item>
     </string-array>
+
+    //menus
+    <string name="profile">PROFILE</string>
+    <string name="feed">FEED</string>
+    <string name="activity">ACTIVITY</string>
+    <string name="settings">SETTINGS</string>
+    <string name="action_category">Category</string>
+    <string name="action_language">Language</string>
+    <string name="action_country">Country</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="share">Share</string>
 
 </resources>
