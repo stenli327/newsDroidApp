@@ -15,7 +15,7 @@
         android:layout_marginTop="50dp"
         android:padding="5dp"
         android:shadowColor="#AAAAAA"
-        android:text="HOT NEWS APP"
+        android:text="Hot Live Headlines"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
@@ -28,7 +28,7 @@
         android:fontFamily="serif"
         android:padding="15dp"
         android:shadowColor="#AAAAAA"
-        android:text="Get latest news. News App can provide live headlines from 70 sources.."
+        android:text="Hot live headlines currently published on a range of news sources and blogs. Hot live application can provide headlines from 70 worldwide sources."
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="?android:attr/colorButtonNormal"

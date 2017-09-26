@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.news.client">
+    package="com.hotlivenews.client">
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainScreen"
+            android:name="com.hotlivenews.client.MainScreen"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -21,15 +21,11 @@
         </activity>
 
         <activity
-            android:name=".CategoryController"
-            android:label="@string/GoogleNews"></activity>
+            android:name="com.hotlivenews.client.CategoryController"
+            android:label="@string/Category"></activity>
         <activity
-            android:name=".ArticlesController"
-            android:label="@string/app_name"></activity>
-        <!--<activity-->
-            <!--android:name=".TextSpeech"-->
-            <!--android:label="@string/app_name"></activity>-->
-
+            android:name="com.hotlivenews.client.ArticlesController"
+            android:label="@string/Article"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
